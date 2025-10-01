@@ -1,0 +1,146 @@
+# WordPress Core
+/wp-admin/
+/wp-includes/
+/wp-content/uploads/
+/wp-content/upgrade/
+wp-config.php
+wp-settings.php
+wp-load.php
+wp-blog-header.php
+index.php
+xmlrpc.php
+wp-trackback.php
+wp-comments-post.php
+wp-cron.php
+wp-links-opml.php
+wp-mail.php
+wp-login.php
+wp-signup.php
+wp-activate.php
+readme.html
+license.txt
+
+# WooCommerce
+/wp-content/plugins/woocommerce/
+wc-logs/
+
+# WordPress Configuration
+wp-config-local.php
+wp-config-staging.php
+wp-config-production.php
+
+# Database
+*.sql
+*.sql.gz
+*.sqlite
+
+# Logs
+*.log
+/logs/
+error_log
+access_log
+
+# Cache
+/wp-content/cache/
+/wp-content/w3tc-config/
+/wp-content/object-cache.php
+advanced-cache.php
+
+# Backups
+*.bak
+backup/
+backups/
+*.backup
+
+# Development Tools
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.yarn-integrity
+.npm
+.node_repl_history
+
+# Build Tools
+dist/
+build/
+.grunt
+.sass-cache/
+.cache/
+
+# IDE and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+.buildpath
+.DS_Store
+Thumbs.db
+
+# Composer
+/vendor/
+composer.lock
+
+# Environment Variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Temporary Files
+*.tmp
+*.temp
+.tmp/
+.temp/
+
+# System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Security
+.htaccess.bak
+wp-config.php.bak
+.wp-cli/
+auth.json
+
+# Performance/Optimization
+/wp-content/w3tc/
+/wp-content/et-cache/
+/wp-content/cache/
+/wp-content/plugins/wp-rocket/
+
+# Theme Development (uncomment if needed)
+# *.css.map
+# *.js.map
+# scss/
+# less/
+# src/
+
+# Deployment
+deploy/
+.deployment
+.deploy.yml
+
+# Testing
+phpunit.xml
+.phpunit.result.cache
+tests/_output/
+codeception.yml
+
+# Documentation (uncomment if you want to ignore)
+# docs/
+# documentation/
+
+# Custom (add your specific ignores here)
+# my-custom-uploads/
+# private-files/

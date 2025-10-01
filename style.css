@@ -1,0 +1,53 @@
+/*--------------------------------------------------------------
+# Loader (Infinite scroll)
+--------------------------------------------------------------*/
+.infinite-loader {
+  display: none; /* oculto por defecto */
+  padding: 1rem 0;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.infinite-loader.active {
+  display: block;
+}
+
+.infinite-loader .spinner {
+  width: 32px;
+  height: 32px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 4px solid rgba(0, 0, 0, 0.08);
+  border-left-color: #f32958;
+  animation: infinite-spin 900ms linear infinite;
+  display: inline-block;
+}
+
+/* accesible text oculto */
+.infinite-loader .visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .infinite-loader .spinner {
+    animation: none;
+    opacity: 0.9;
+    transform: none;
+  }
+}
+
+@keyframes infinite-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
