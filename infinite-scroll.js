@@ -8,12 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let page = 1;
   let loading = false;
   let hasMore = true;
+  let tStart = null; // tiempo cuando el loader se hace visible
 
   // Loader
   const loader = document.createElement("div");
   loader.className = "infinite-loader";
   loader.innerHTML = `
-    <div class="spinner" aria-hidden="true"></div>
+    <div id="spinner" class="spinner" aria-hidden="true"></div>
     <span class="visually-hidden">Cargando más productos...</span>
   `;
 
@@ -30,9 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (loader.classList.contains("active") || loaderTimer) return;
     loaderTimer = setTimeout(() => {
       loader.classList.add("active");
+      // capturar el tiempo justo antes de que sea visible el loader
+      tStart = performance.now();
       // accesibilidad: indicamos que hay actividad
       loader.setAttribute("role", "status");
-      loader.setAttribute("aria-live", "polite");
+      loader.setAttribute("aria-hidden", "false");
+      loader.setAttribute("aria-busy", "true");
       loaderTimer = null;
     }, delay);
   }
@@ -44,7 +48,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     loader.classList.remove("active");
     loader.removeAttribute("role");
-    loader.removeAttribute("aria-live");
+    loader.setAttribute("aria-hidden", "true");
+    loader.setAttribute("aria-busy", "false");
+
+    // si el loader ha sido visible, calcular el tiempo que ha estado visible
+    if (tStart !== null) {
+      const tEnd = performance.now();
+      const durationMs = Math.round(tEnd - tStart);
+      // console.log(`Loader visible for ${durationMs}ms`);
+
+      // enviar evento a GTM mediante dataLayer
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "infinite_scroll_loader",
+        event_category: "engagement",
+        event_label: "Infinite Scroll Loader Duration",
+        duration_ms: durationMs,
+        duration_seconds: (durationMs / 1000).toFixed(2),
+      });
+
+      tStart = null; // reset
+    }
   }
 
   async function loadMore() {

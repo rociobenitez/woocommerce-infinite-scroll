@@ -12,6 +12,7 @@ Una implementación de scroll infinito para productos de WooCommerce que reempla
 - **Accesibilidad** integrada (ARIA attributes, screen readers)
 - **Bootstrap compatible** (fácil adaptación a CSS nativo)
 - **Performance optimizada** con debouncing y memoria eficiente
+- **Analytics integrado:** Tracking de tiempos de loader para Google Tag Manager
 
 ## Requisitos
 
@@ -180,6 +181,54 @@ Y agrega CSS personalizado:
   }
 }
 ```
+
+## Analytics y Tracking
+
+### Integración con Google Tag Manager
+
+El script incluye tracking automático del tiempo de visibilidad del loader, enviando eventos a Google Tag Manager para análisis de rendimiento y experiencia de usuario.
+
+#### Evento enviado a GTM
+
+Cada vez que el loader se oculta después de estar visible, se envía un evento con la siguiente estructura:
+
+```javascript
+window.dataLayer.push({
+  event: "infinite_scroll_loader",
+  event_category: "engagement",
+  event_label: "Infinite Scroll Loader Duration",
+  duration_ms: durationMs, // Duración en milisegundos
+  duration_seconds: seconds, // Duración en segundos (2 decimales)
+});
+```
+
+#### Configuración en GTM
+
+Para capturar estos eventos en Google Tag Manager:
+
+1. **Crear Variables**:
+
+   - `duration_ms` (Variable de capa de datos)
+   - `duration_seconds` (Variable de capa de datos)
+
+2. **Crear Trigger**:
+
+   - Tipo: Evento personalizado
+   - Nombre del evento: `infinite_scroll_loader`
+
+3. **Crear Tag**:
+   - Tipo: Google Analytics 4 Event
+   - Nombre del evento: `infinite_scroll_loader`
+   - Parámetros personalizados:
+     - `duration_ms`: {{duration_ms}}
+     - `duration_seconds`: {{duration_seconds}}
+     - `event_category`: {{Event Category}}
+
+#### Métricas útiles
+
+- **Tiempo promedio de carga**: Analizar tiempos de respuesta del servidor
+- **Distribución de tiempos**: Identificar patrones de performance
+- **Correlación con conversiones**: Relacionar velocidad de carga con ventas
 
 ## Debugging y solución de problemas
 
